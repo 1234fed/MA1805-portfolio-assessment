@@ -1,7 +1,7 @@
 let rgb = [255, 0, 0];    
 
 function setuop() {
-    createCanvas(400, 400);
+    createCanvas(WindowWidth, WindowHeight);
     }
 
 function draw() {
