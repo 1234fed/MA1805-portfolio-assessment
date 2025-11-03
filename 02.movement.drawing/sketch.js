@@ -1,9 +1,13 @@
 let size = 50;
 let x = size/2;
 let y = 50; 
-let moveX = 3; 
-let moveY = 3; 
+let moveX = 1.5; 
+let moveY = 1.5; 
 let reverseX = false; 
+
+let r = 255;
+let g = 100;
+let b = 100;
 
 // Can you use this variable to make the 
 // ellipse go up or down? 
@@ -11,15 +15,32 @@ let reverseY = false;
 
 function setup(){
 	createCanvas(windowWidth, windowHeight);
-	background (200);
+	background(255);
   noStroke();
 }
 
 function draw(){
   background(0); 
 
-	fill(100);
-	text (x, y, size);
+  fill(r, g, b);
+  textSize(60);
+  textFont('franklin gothic medium');
+  text("DVD", x, y);
+
+  fill(r, g, b);        // same colour as text
+  ellipse(x + 65, y + 20, 126, 13);  // small ellipse just under the text
+
+  fill(0, 0, 0);
+  textSize(10);
+  textFont('arial bold');
+  textStyle(BOLD);
+  text("V I D E O", x + 47, y + 24);  // wording on the ellipse
+  
+  fill(r, g, b);
+  textSize(6);
+  textFont('franklin gothic medium');
+  text("TM", x + 122, y + 33);  // trademark text
+
 
   // Determine if we should add or subtract
   // to add or subtract from the x position
@@ -31,11 +52,11 @@ function draw(){
 
   // Detect if we hit the side
   if(x >= width-(size/2)){
-    reverseX = true; 
-    moveX = random(0,10); 
+    reverseX = true;  
+    changecolor();
   }else if(x <= 0+(size/2)){
     reverseX = false; 
-    moveX = random(0,10); 
+    changecolor();
   }
 
     // Determine if we should add or subtract
@@ -49,10 +70,18 @@ function draw(){
   // Detect if we hit the side
   if(y >= height-(size/2)){
     reverseY = true; 
-    moveY = random(0,10); 
+    changecolor();
   }else if(y <= 0+(size/2)){
     reverseY = false; 
-    moveY = random(0,10); 
+    changecolor();
+  }
+
+  // Changing the random color
+  function changecolor(){
+      // pick a bright, saturated random colour
+    r = random([255, 0, 0, 0, 255, 255, 0, 0]);   // red, green, blue, yellow, etc.
+    g = random([0, 255, 0, 255, 255, 0, 255, 0]);
+    b = random([0, 0, 255, 255, 0, 255, 255, 255]);
   }
 
 }
