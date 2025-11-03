@@ -77,11 +77,21 @@ function draw(){
   }
 
   // Changing the random color
-  function changecolor(){
-      // pick a bright, saturated random colour
-    r = random([255, 0, 0, 0, 255, 255, 0, 0]);   // red, green, blue, yellow, etc.
-    g = random([0, 255, 0, 255, 255, 0, 255, 0]);
-    b = random([0, 0, 255, 255, 0, 255, 255, 255]);
-  }
+function changecolor() {
+  // pick from bright, saturated DVD-style colours (no black)
+  let colors = [
+    [255, 0, 0],     // red
+    [0, 255, 0],     // green
+    [0, 0, 255],     // blue
+    [255, 255, 0],   // yellow
+    [255, 0, 255],   // magenta
+    [0, 255, 255],   // cyan
+    [255, 255, 255]  // white
+  ];
 
+  let c = random(colors);
+  r = c[0];
+  g = c[1];
+  b = c[2];
+}
 }
