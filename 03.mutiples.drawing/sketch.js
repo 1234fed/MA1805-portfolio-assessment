@@ -1,40 +1,12 @@
-let logos = []; //store all dvd logos
+let logos = []; // store all dvd logos
 
 let size = 50;
-let x = size/2;
-let y = 50; 
-let moveX = 1.5; 
-let moveY = 1.5; 
-let reverseX = false; 
+let moveX = 1.5;
+let moveY = 1.5;
 
-let r = 255;
-let g = 100;
-let b = 100;
-
-// Can you use this variable to make the 
-// ellipse go up or down? 
-let reverseY = false; 
-
-function changecolor() { // Changing the random color
-  // pick from bright, saturated DVD-style colours (no black)
-  let colors = [
-    [255, 0, 0],     // red
-    [0, 255, 0],     // green
-    [0, 0, 255],     // blue
-    [255, 255, 0],   // yellow
-    [255, 0, 255],   // magenta
-    [0, 255, 255],   // cyan
-    [255, 255, 255]  // white
-  ];
-
-  let c = random(colors);
-  r = c[0];
-  g = c[1];
-  b = c[2];
-} 
-function setup(){
-	createCanvas(windowWidth, windowHeight);
-	background(255);
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(255);
   noStroke();
 }
 
@@ -45,7 +17,7 @@ function draw() {
   for (let i = logos.length - 1; i >= 0; i--) {
     let logo = logos[i];
 
-    // move
+    // move left/right
     if (!logo.reverseX) logo.x += logo.moveX;
     else logo.x -= logo.moveX;
 
@@ -57,6 +29,7 @@ function draw() {
       changecolor(logo);
     }
 
+    // move up/down
     if (!logo.reverseY) logo.y += logo.moveY;
     else logo.y -= logo.moveY;
 
@@ -68,25 +41,28 @@ function draw() {
       changecolor(logo);
     }
 
-    // calculate fade over 30 seconds (30 * 60 = 1800 frames at 60fps)
+    // fade over 30 seconds (≈1800 frames at 60fps)
     logo.lifetime--;
     let alpha = map(logo.lifetime, 0, 1800, 0, 255);
 
-    // draw the logo
+    // draw DVD text
     fill(logo.r, logo.g, logo.b, alpha);
     textSize(60);
     textFont('franklin gothic medium');
     text("DVD", logo.x, logo.y);
 
+    // ellipse under text
     fill(logo.r, logo.g, logo.b, alpha);
     ellipse(logo.x + 65, logo.y + 20, 126, 13);
 
+    // “VIDEO” text on ellipse
     fill(0, 0, 0, alpha);
     textSize(10);
     textFont('arial bold');
     textStyle(BOLD);
     text("V I D E O", logo.x + 47, logo.y + 24);
 
+    // “TM” text
     fill(logo.r, logo.g, logo.b, alpha);
     textSize(6);
     textFont('franklin gothic medium');
@@ -111,10 +87,26 @@ function mousePressed() {
     r: 255,
     g: 255,
     b: 255,
-    lifetime: 1800 // about 30 seconds at 60 FPS
+    lifetime: 1800 // about 30 seconds
   };
   changecolor(logo);
   logos.push(logo);
 }
 
+function changecolor(logo) {
+  // pick from bright, saturated DVD-style colours (no black)
+  let colors = [
+    [255, 0, 0],     // red
+    [0, 255, 0],     // green
+    [0, 0, 255],     // blue
+    [255, 255, 0],   // yellow
+    [255, 0, 255],   // magenta
+    [0, 255, 255],   // cyan
+    [255, 255, 255]  // white
+  ];
 
+  let c = random(colors);
+  logo.r = c[0];
+  logo.g = c[1];
+  logo.b = c[2];
+}
