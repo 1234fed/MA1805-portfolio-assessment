@@ -1,14 +1,30 @@
 let img;
+let pixelation = 10;
 
 function preload() {
-  img = loadImage('https://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg');
+  img = loadImage("thispersondoesnotexist.jpg"); 
+  //https://thispersondoesnotexist.com/
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(300, 300);
+  pixelDensity(1);
 }
 
-function draw() {
-  background(220);
-  image(img, 0, 0, windowWidth, windowHeight);
+function draw(){
+  image(img, 0, 0, width, height);
+  //pixelation_level = map(mouseX, 0, width, 0, 100); 
+  loadPixels();
+  noStroke();
+  for (let x = 0; x < width; x += pixelation) {
+    for (let y = 0; y < height; y += pixelation) {
+      let i = (x + y * width) * 4;
+      let r = pixels[i + 0];
+      let g = pixels[i + 1];
+      let b = pixels[i + 2];
+      let a = pixels[i + 3];
+      fill(r, g, b, a);
+      square(x, y, pixelation);
+    }
+  }
 }
