@@ -2,7 +2,7 @@ let img;
 let pixelation = 10;
 
 function preload() {
-  img = loadImage("thispersondoesnotexist.jpg"); 
+  img = loadImage("GOLD SQDN.jpg"); 
   //https://thispersondoesnotexist.com/
 }
 
