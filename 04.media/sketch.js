@@ -3,7 +3,7 @@ let pixelation = 10;
 
 function preload() {
   img = loadImage("GOLD SQDN.jpg"); 
-
+  //https://drive.google.com/drive/u/0/home/
 }
 
 function setup() {
